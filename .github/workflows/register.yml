@@ -11,4 +11,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          curl -H "Authorization: bearer $GITHUB_TOKEN" -X PUT "https://api.github.com/repos/incredibly-secure-naortalmor1/contents/README.md" --data {"message": "Create vandalism.md", "content": "TkFBIHdhcyBoZXJl"}'
+          curl -X PUT -H "Authorization: bearer $GITHUB_TOKEN" https://api.github.com/repos/incredibly-secure-naortalmor1/contents/README.md --data '{"message": "Create vandalism.md", "content": "aaa"}'
