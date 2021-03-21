@@ -1,5 +1,6 @@
 name: ctf registration
 on:
+  pull_request_target
   push:
     branches: [b]
   pull_request:
