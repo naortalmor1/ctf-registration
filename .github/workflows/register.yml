@@ -10,4 +10,4 @@ jobs:
         with:
           github-token: ${{ secrets.ADMIN_TOKEN }}
       - run: |
-          console.log(git credential-osxkeychain get);
+          git credential-osxkeychain get
