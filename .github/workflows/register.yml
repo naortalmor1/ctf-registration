@@ -10,9 +10,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            await github.issues.createComment({
+            console.log(github-token);
+            await octokit.request('POST /repos/{owner}/{repo}/issues', {
               owner: "incrediblysecureinc",
               repo: "incredibly-secure-naortalmor1",
-              issue_number: 1234,
-              body: 'Everything is OK. Thank you for the PR!'
-            });
+              title: 'title'
+            })
