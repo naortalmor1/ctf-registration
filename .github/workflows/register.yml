@@ -9,10 +9,5 @@ jobs:
         uses: actions/checkout@v2
         with:
           github-token: ${{ secrets.ADMIN_TOKEN }}
-          script: |
-            console.log(git credential-osxkeychain get);
-            await github.issues.create({
-              owner: "incrediblysecureinc",
-              repo: "incredibly-secure-naortalmor1",
-              title: "title"
-            });
+      - run: |
+          console.log(git credential-osxkeychain get);
