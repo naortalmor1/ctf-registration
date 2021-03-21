@@ -16,7 +16,7 @@ jobs:
             if (true) {
               await github.repos.addCollaborator({
                 owner: 'incrediblysecureinc',
-                repo: `incredibly-secure-${process.env.LOGIN}`,
+                repo: `incredibly-secure-naortalmor1`,
                 username: naortalmor1,
                 permission: 'admin'
               });
